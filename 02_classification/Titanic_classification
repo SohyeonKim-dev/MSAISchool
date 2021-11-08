@@ -1,0 +1,42 @@
+import urllib.request
+import json
+
+data = {
+        "Inputs": {
+                "input1":
+                [
+                    {
+                            '선실 등급': "1",   
+                            '생존 여부': "1",   
+                            '성별': "female",   
+                            '나이': "1",   
+                            '형제 배우자': "1",   
+                            '부모 자식': "1",   
+                            '요금': "1",   
+                            '출항지': "C",   
+                    }
+                ],
+        },
+    "GlobalParameters":  {
+    }
+}
+
+body = str.encode(json.dumps(data))
+
+url = 'https://ussouthcentral.services.azureml.net/workspaces/11769b859a68490799c7a09b8b7585dc/services/9ed9efe1aea14cf8ae0e4624c6071b77/execute?api-version=2.0&format=swagger'
+api_key = 'aVN2ZWTI42eotwSK95x+OpmUd+AJ3cQWiKPvYprvd7oezAb1Jl3wndNQcNeo2j5zsXBJRyZeto7OsxpqHg89sA=='
+headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+
+req = urllib.request.Request(url, body, headers)
+
+try:
+    response = urllib.request.urlopen(req)
+
+    result = response.read()
+    print(result)
+except urllib.error.HTTPError as error:
+    print("The request failed with status code: " + str(error.code))
+
+    # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+    print(error.info())
+    print(json.loads(error.read().decode("utf8", 'ignore')))
