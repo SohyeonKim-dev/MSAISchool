@@ -1,4 +1,4 @@
-# MachineLearning_STUDIO_AI
+# MachineLearning
 ## Artificial Intelligence
 
 ## Microsoft AI School I (Machine Learning)
